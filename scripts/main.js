@@ -11,10 +11,14 @@ var landing = [-97.43907175057747, 31.417202518629118];
 // Initiate map
 var map = new mapboxgl.Map({
   container: 'map',
-  style: 'mapbox://styles/mapbox/outdoors-v11',
+  style: 'mapbox://styles/mapbox/light-v10',
   center: landing,
   zoom: 1
 });
+
+// dark style
+// mapbox://styles/mapbox/dark-v10
+
 
 //init geocoder
 var geocoder = new MapboxGeocoder({
@@ -28,7 +32,7 @@ map.addControl(geocoder);
 map.flyTo({
   center: landing,
   zoom: 6,
-  speed: 0.6,
+  speed: 1,
   curve: 1,
   easing(t){
   return t;
@@ -49,7 +53,7 @@ var marker = new mapboxgl.Marker({ color: '#1c1c1c'})
 function getAPIdata() {
 
   // construct request
-  var request = 'https://api.openweathermap.org/data/2.5/weather?lat=31.417202518629118&lon=-97.43907175057747&appid=7d7703fc298cdb7a075ae39addb6b4da';
+  var request = 'https://api.openweathermap.org/data/2.5/weather?lat='+ landing[1] +'&lon=' + landing[0] + '&appid=' + openWeatherMapUrlApiKey;
 
   // get current weather
   fetch(request)  
