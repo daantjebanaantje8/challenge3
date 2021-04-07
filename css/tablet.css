@@ -4,13 +4,14 @@
 		display: none;
 	}
 
-	/*verander naar groter spacex logo*/
+	/*verandert naar groter spacex logo*/
 	.spacex{
 		display: flex;
     	width: 40%;
     	margin: 0px auto 20px auto;
 	}
 
+	/*wat aanpassingen aan de onderdelen zodat ze een beetje staan zoals het hoort*/
 	h1{
 		font-size: 3.5vw;
 	}
@@ -36,5 +37,5 @@
 	#forecastbox{
 		width: 37%;
 		margin: 0 3px;
-		height: 30vh;
+		height: 40vh;
 	}

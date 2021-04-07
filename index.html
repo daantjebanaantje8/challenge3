@@ -4,29 +4,30 @@
 		<meta charset="utf-8">
 		<title>SpaceX ITS Dashboard</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- linkje voor de favicon -->
 		<link rel="icon" type="image/x-icon" href="favicon.ico" />
 
-		<!-- css -->
+		<!-- globale css met media queries -->
 		<link rel="stylesheet" type="text/css" href="css/telefoon.css">
 		<link rel="stylesheet" type="text/css" href="css/tablet.css">
 		<link rel="stylesheet" type="text/css" href="css/laptop.css">
+		<!-- mapbox stijl -->
 		<link href="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" rel="stylesheet">
+		<!-- ------------------------------------------------------------- -->
+		<!-- algemene js -->
+		<script type="text/javascript" src="scripts/main.js" defer></script>
 
-		<!-- js -->
+		<!-- mapbox js -->
 		<script src="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js"></script>
 		
-		<!-- geocoder js -->
+		<!-- geocoder js & stijl -->
 		<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
 		<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
-
 		<!-- Promise polyfill script is required -->
 		<!-- to use Mapbox GL Geocoder in IE 11. -->
 		<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 		
-		<script type="text/javascript" src="scripts/main.js" defer></script>
-
-
 		<!-- link voor font (vergelijkbaar met SpaceX font) -->
 		<link rel="stylesheet" href="https://use.typekit.net/awq8dww.css">
 	</head>
@@ -46,16 +47,21 @@
 		</div>
 		<!-- flexbox container; kaart en weervoorspelling -->
 		<div class="flex-container">
+			<!-- als ik meer tijd had gehad, wilde ik dat de landing site zich automatisch invulde adhv long lat. samen met dit had ik ook nog een 'set landing site' button willen maken zodat de terugkerende gebruikers het nog zouden kunnen aanpassen..  -->
 			<h2>Landing site: McGregor, TX, United States</h2>
+			<!-- reset naar landing site -->
 			<button id="knop">Return to landing site</button>
-			<!-- kaart -->
+			<!-- hier komt de kaart -->
 			<div id="map"></div>
 
 			<!-- weervoorspelling -->
 			<div id="forecastbox">
+				<!-- deze verandert adhv of het de landing site is of niet (zie js) -->
 				<h3 id="status">Current weather at landing site:</h3>
+				<!-- hierin zit de temperatuur, beschrijving en icon -->
 				<div id="forecast"></div>
-
+				<!-- een suggestie adhv hoe warm of koud het is -->
+				<div id="suggest"></div>
 				
 			</div>
 		</div>

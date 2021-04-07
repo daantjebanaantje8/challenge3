@@ -1,10 +1,12 @@
 /*media query voor laptop begint bij 1024px*/
 @media only screen and (min-width: 1024px){
 
+	/*grotere margin aan de zijkanten anders werd het zo breed/onoverzichtelijk*/
 	body{
 		margin: 0 8%;
 	}	
 
+	/*wat aanpassingen aan de onderdelen zodat ze een beetje staan zoals het hoort*/
 	h1{
 		font-size: 3vw;
 	}
