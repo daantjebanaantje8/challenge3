@@ -1,0 +1,17 @@
+/*media query voor tablet begint bij 750px*/
+@media only screen and (min-width: 750px){
+	.smallx{
+		display: none;
+	}
+
+	/*verander naar groter spacex logo*/
+	.spacex{
+		display: flex;
+    	width: 40%;
+    	margin: 0px auto 20px auto;
+	}
+
+	
+	.flex-container{
+		flex-direction: row;
+	}

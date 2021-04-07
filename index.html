@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>SpaceX ITS Dashboard</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- css -->
+		<link rel="stylesheet" type="text/css" href="css/telefoon.css">
+		<link rel="stylesheet" type="text/css" href="css/tablet.css">
+		<link rel="stylesheet" type="text/css" href="css/laptop.css">
+		<link href="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" rel="stylesheet">
+
+		<!-- js -->
+		<script src="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js"></script>
+		
+		<!-- geocoder js -->
+		<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+		<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
+
+		<!-- Promise polyfill script is required -->
+		<!-- to use Mapbox GL Geocoder in IE 11. -->
+		<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+		
+		<script type="text/javascript" src="scripts/main.js" defer></script>
+
+
+		<!-- link voor font (vergelijkbaar met SpaceX font) -->
+		<link rel="stylesheet" href="https://use.typekit.net/awq8dww.css">
+	</head>
+	<body>
+		<!-- eerste flexbox container; dit betreft de logo en tekst -->
+		<div class="flex-header">
+			<figure>
+				<img class="smallx" src="img/smallxlogo.png" alt="small spacex logo">
+			</figure>
+
+			<figure>
+				<img class="spacex" src="img/spacexlogo.png" alt="spacex logo">
+			</figure>
+
+			<h1>Interplanetary Transport System Dashboard</h1>
+
+		</div>
+		<!-- flexbox container; kaart en weervoorspelling -->
+		<div class="flex-container">
+			<h2>Landing location: McGregor, TX, United States</h2>
+			<!-- kaart -->
+			<div id="map"></div>
+
+			<!-- weervoorspelling -->
+			<div id="forecastbox">
+				<h3>Forecast for this week:</h3>
+				<div id="forecast"></div>
+			</div>
+		</div>
+	</body>
+</html>
