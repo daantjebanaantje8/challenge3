@@ -6,8 +6,12 @@ body{
 	margin: 0 20px;
 }
 
-p{
+p, h3{
 	color: #1c1c1c;
+}
+
+#forecastbox > h3{
+	color: white;
 }
 
 

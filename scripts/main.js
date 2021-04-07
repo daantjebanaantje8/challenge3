@@ -1,33 +1,27 @@
-// Set api token for mapbox
+// Set api token
 mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuaXF1ZWlkb28iLCJhIjoiY2tta2w5ZG1zMTIyODJvcWtlMGQyNzFybCJ9.b0xq0lhMNkzDULtaiQ6-Ig';
-
-// api token for openWeatherMap
-var openWeatherMapUrl = 'https://api.openweathermap.org/data/2.5/weather';
 var openWeatherMapUrlApiKey = '7d7703fc298cdb7a075ae39addb6b4da';
 
-//landing variable
+
 var landing = [-97.43907175057747, 31.417202518629118];
 
-// Initiate map
+// Init map
 var map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/light-v10',
-  center: landing,
-  zoom: 1
+container: 'map',
+style: 'mapbox://styles/mapbox/light-v10',
+center: landing,
+zoom: 1,
 });
 
-// dark style
-// mapbox://styles/mapbox/dark-v10
+var popup = new mapboxgl.Popup().setHTML('<h3>SpaceX Hangar</h3><p>This is where the SpaceX ITS will be landing.</p>');
 
 
-//init geocoder
-var geocoder = new MapboxGeocoder({
-  accessToken: mapboxgl.accessToken,
-  language: 'en-GB', // Specificeert taal als engels
-  mapboxgl: mapboxgl
-});
 
-map.addControl(geocoder);
+var marker = new mapboxgl.Marker({ color: '#1c1c1c'})
+.setLngLat(landing)
+.setPopup(popup)
+.addTo(map);
+
 
 map.flyTo({
   center: landing,
@@ -39,39 +33,68 @@ map.flyTo({
   }
 });
 
-//marker and popup window
-var popup = new mapboxgl.Popup().setHTML('<p>This is where the Interplanetary Transport System will be landing.</p>');
-var marker = new mapboxgl.Marker({ color: '#1c1c1c'})
-.setLngLat(landing)
-.setPopup(popup)
-.addTo(map);
+// startup weather
+function getLandingWeather() {
+ // construct request
+ var request = 'https://api.openweathermap.org/data/2.5/weather?lat='+ landing[1] +'&lon='+ landing[0] +'&appid=' + openWeatherMapUrlApiKey;
 
-
-
-
-//weather
-function getAPIdata() {
-
-  // construct request
-  var request = 'https://api.openweathermap.org/data/2.5/weather?lat='+ landing[1] +'&lon=' + landing[0] + '&appid=' + openWeatherMapUrlApiKey;
-
-  // get current weather
-  fetch(request)  
+ // get current weather
+ fetch(request)  
   
-  // parse response to JSON format
-  .then(function(response) {
-    return response.json();
-  })
+ // parse response to JSON format
+ .then(function(response) {
+   return response.json();
+ })
   
-  // do something with response
-  .then(function(response) {
-    // show full JSON object
-    // console.log(response);
-    var weatherBox = document.getElementById('forecast');
-    var degC = Math.floor(response.main.temp - 273.15);
-    weatherBox.innerHTML = degC + '&#176;C <br>' + response.weather[0].description;
-  });
+ // do something with response
+ .then(function(response) {
+   // show full JSON object
+   // console.log(response);
+   var weatherBox = document.getElementById('forecast');
+   var degC = Math.floor(response.main.temp - 273.15);
+   weatherBox.innerHTML = degC + '&#176;C <br>' + response.weather[0].description;
+ });
 }
 
 // init data stream
-getAPIdata();
+getLandingWeather();
+
+var geocoder = new MapboxGeocoder({
+accessToken: mapboxgl.accessToken,
+types: 'country,region,place,postcode,locality,neighborhood'
+});
+
+
+map.addControl(geocoder);
+
+geocoder.on('result', function(response) {
+document.getElementById('status').innerHTML = 'Current weather:';
+
+map.flyTo({
+  center: [response.result.center[0], response.result.center[1]],
+  zoom: 10,
+  speed: 1,
+  curve: 1,
+  easing(t){
+  return t;},
+  essential: true // this animation is considered essential with respect to prefers-reduced-motion
+});
+
+var request = 'https://api.openweathermap.org/data/2.5/weather?lat='+ response.result.center[1] +'&lon=' + response.result.center[0] + '&appid=' + openWeatherMapUrlApiKey;
+// get current weather
+fetch(request)
+
+ // parse response to JSON format
+.then(function(response) {
+  return response.json();
+})
+  
+// do something with response
+.then(function(response) {
+  // show full JSON object
+  // console.log(response);
+  var weatherBox = document.getElementById('forecast');
+  var degC = Math.floor(response.main.temp - 273.15);
+  weatherBox.innerHTML = degC + '&#176;C <br>' + response.weather[0].description;
+});
+});
