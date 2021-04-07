@@ -24,6 +24,10 @@
 		flex-direction: row;
 	}
 
+	#knop{
+		font-size: 2vw;
+	}
+
 	#map{
 		width: 60%;
 		margin: 0 3px;
@@ -32,5 +36,5 @@
 	#forecastbox{
 		width: 37%;
 		margin: 0 3px;
-
+		height: 30vh;
 	}

@@ -5,6 +5,7 @@ var openWeatherMapUrlApiKey = '7d7703fc298cdb7a075ae39addb6b4da';
 
 var landing = [-97.43907175057747, 31.417202518629118];
 
+
 // Init map
 var map = new mapboxgl.Map({
 container: 'map',
@@ -26,11 +27,8 @@ var marker = new mapboxgl.Marker({ color: '#1c1c1c'})
 map.flyTo({
   center: landing,
   zoom: 6,
-  speed: 1,
+  speed: 0.8,
   curve: 1,
-  easing(t){
-  return t;
-  }
 });
 
 // startup weather
@@ -52,7 +50,7 @@ function getLandingWeather() {
    // console.log(response);
    var weatherBox = document.getElementById('forecast');
    var degC = Math.floor(response.main.temp - 273.15);
-   weatherBox.innerHTML = degC + '&#176;C <br>' + response.weather[0].description;
+   weatherBox.innerHTML = degC + '&#176;C <br>' + response.weather[0].description+ '<br>' + '<img src="https://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png">';
  });
 }
 
@@ -73,10 +71,8 @@ document.getElementById('status').innerHTML = 'Current weather:';
 map.flyTo({
   center: [response.result.center[0], response.result.center[1]],
   zoom: 10,
-  speed: 1,
+  speed: 0.8,
   curve: 1,
-  easing(t){
-  return t;},
   essential: true // this animation is considered essential with respect to prefers-reduced-motion
 });
 
@@ -93,8 +89,21 @@ fetch(request)
 .then(function(response) {
   // show full JSON object
   // console.log(response);
+
   var weatherBox = document.getElementById('forecast');
   var degC = Math.floor(response.main.temp - 273.15);
-  weatherBox.innerHTML = degC + '&#176;C <br>' + response.weather[0].description;
+  weatherBox.innerHTML = degC + '&#176;C <br>' + response.weather[0].description + '<br>' + '<img src="https://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png">';
+
 });
 });
+
+document.getElementById('knop').onclick = function() {
+  map.flyTo({
+  center: landing,
+  zoom: 6,
+  speed: 0.8,
+  essential: true // this animation is considered essential with respect to prefers-reduced-motion
+  });
+  document.getElementById('status').innerHTML = 'Current weather at landing site:';
+  getLandingWeather();
+};
